@@ -16,8 +16,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
     const toggleEditing = () => setEditing((prev) => !prev);
     const onSubmit = async (event) => {
         event.preventDefault();
-        console.log(nweetObj, newNweet);
-        await dbService.doc(`nweets/${nweetObj.id}`).update({ text: newNweet });
+        await dbService.doc(`nweets/${nweetObj.id}`).update({
+            text: newNweet,
+        });
         setEditing(false);
     };
     const onChange = (event) => {
@@ -35,12 +36,12 @@ const Nweet = ({ nweetObj, isOwner }) => {
                             type="text"
                             placeholder="Edit your nweet"
                             value={newNweet}
-                            onChange={onChange}
                             required
                             autoFocus
+                            onChange={onChange}
                             className="formInput"
                         />
-                        <input className="formBtn" type="submit" value="Update Nweet" />
+                        <input type="submit" value="Update Nweet" className="formBtn" />
                     </form>
                     <span onClick={toggleEditing} className="formBtn cancelBtn">
                         Cancel
@@ -51,7 +52,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
                     <h4>{nweetObj.text}</h4>
                     {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
                     {isOwner && (
-                        <div className="nweet__actions">
+                        <div class="nweet__actions">
                             <span onClick={onDeleteClick}>
                                 <FontAwesomeIcon icon={faTrash} />
                             </span>
